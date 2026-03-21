@@ -1,0 +1,13 @@
+package com.yx198.helloserver3;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class HelloServer3Application {
+
+    public static void main(String[] args) {
+        SpringApplication.run(HelloServer3Application.class, args);
+    }
+
+}
