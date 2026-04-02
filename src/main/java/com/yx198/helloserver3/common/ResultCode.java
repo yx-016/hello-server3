@@ -7,7 +7,14 @@ public enum ResultCode {
 
     // 权限相关
     TOKEN_INVALID(401, "登录凭证已缺失或过期，请重新登录"),
-    UNAUTHORIZED(401, "非法操作: 敏感操作需要授权");
+    UNAUTHORIZED(401, "非法操作: 敏感操作需要授权"),
+
+    // 在枚举类末尾添加（注意逗号和分号）
+    USER_HAS_EXISTED(4001, "该用户名已被注册"),
+    USER_NOT_EXIST(4002, "该用户不存在"),
+    PASSWORD_ERROR(4003, "账号或密码错误");
+
+// 最后的常量后面加分号
 
     private final Integer code;
     private final String msg;
