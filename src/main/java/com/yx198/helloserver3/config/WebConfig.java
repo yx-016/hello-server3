@@ -13,7 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(new AuthInterceptor())
                 .addPathPatterns("/api/**")  // 拦截 /api 下的所有请求路径
                 .excludePathPatterns(
-                        "/api/users/login"    // 只放行登录接口，其他全部拦截交由拦截器内部判断
+                        "/api/users/login","/api/users"    // 只放行登录接口，其他全部拦截交由拦截器内部判断
                 );
     }
 }
