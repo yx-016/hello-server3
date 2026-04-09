@@ -13,21 +13,29 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    // 1. 注册
+    // 注册
     @PostMapping
     public Result<String> register(@RequestBody UserDTO userDTO) {
         return userService.register(userDTO);
     }
 
-    // 2. 登录
+    // 登录
     @PostMapping("/login")
     public Result<String> login(@RequestBody UserDTO userDTO) {
         return userService.login(userDTO);
     }
 
-    // 3. 根据 id 查询用户
+    // 根据 ID 查询用户
     @GetMapping("/{id}")
     public Result<String> getUser(@PathVariable("id") Long id) {
         return userService.getUserById(id);
+    }
+
+    // 分页查询用户列表（新增）
+    @GetMapping("/page")
+    public Result<Object> getUserPage(
+            @RequestParam(defaultValue = "1") Integer pageNum,
+            @RequestParam(defaultValue = "5") Integer pageSize) {
+        return userService.getUserPage(pageNum, pageSize);
     }
 }
