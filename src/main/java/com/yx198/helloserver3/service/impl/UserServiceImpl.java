@@ -12,6 +12,7 @@ import com.yx198.helloserver3.mapper.UserInfoMapper;
 import com.yx198.helloserver3.mapper.UserMapper;
 import com.yx198.helloserver3.service.UserService;
 import com.yx198.helloserver3.vo.UserDetailVO;
+import com.yx198.helloserver3.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private StringRedisTemplate redisTemplate;
 
+    @Autowired
+    private JwtUtil jwtUtil;
+
     // 注册
     @Override
     public Result<String> register(UserDTO userDTO) {
@@ -59,20 +63,27 @@ public class UserServiceImpl implements UserService {
     // 登录
     @Override
     public Result<String> login(UserDTO userDTO) {
+        // 1. 根据用户名查询数据库
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(User::getUsername, userDTO.getUsername());
         User dbUser = userMapper.selectOne(queryWrapper);
 
+        // 2. 校验用户是否存在
         if (dbUser == null) {
             return Result.error(ResultCode.USER_NOT_EXIST);
         }
 
+        // 3. 校验密码是否正确
         if (!dbUser.getPassword().equals(userDTO.getPassword())) {
             return Result.error(ResultCode.PASSWORD_ERROR);
         }
 
-        String token = UUID.randomUUID().toString();
-        return Result.success(token);
+        // 4. 生成 JWT 令牌
+        String jwt = jwtUtil.generateToken(userDTO.getUsername());
+        System.out.println("登录成功，生成 JWT: " + jwt);
+
+        // 5. 返回 JWT
+        return Result.success(jwt);
     }
 
     // 根据 ID 查询用户

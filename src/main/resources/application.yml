@@ -13,3 +13,7 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+jwt:
+  secret: mySecretKeyForJwtTokenGeneration2025
+  expiration: 86400000  # 24小时，单位毫秒
