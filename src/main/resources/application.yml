@@ -5,10 +5,17 @@ spring:
     username: postgres
     password: 123456
 
-    data:
-      redis:
-        host: 127.0.0.1
-        port: 6379
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+
+  ai:
+    dashscope:
+      api-key: ${AI_DASHSCOPE_API_KEY}
+      chat:
+        options:
+          model: qwen-max  # 可选：qwen-plus, qwen-max, qwen-turbo
 
 mybatis-plus:
   configuration:
@@ -16,4 +23,4 @@ mybatis-plus:
 
 jwt:
   secret: mySecretKeyForJwtTokenGeneration2025
-  expiration: 86400000  # 24小时，单位毫秒
+  expiration: 86400000
