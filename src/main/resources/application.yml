@@ -12,7 +12,7 @@ spring:
 
   ai:
     dashscope:
-      api-key: ${AI_DASHSCOPE_API_KEY}
+      api-key: sk-b78bdf9fa8f64a0fa6148fcb37e85177
       chat:
         options:
           model: qwen-max  # 可选：qwen-plus, qwen-max, qwen-turbo
