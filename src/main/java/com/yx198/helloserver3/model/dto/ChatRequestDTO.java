@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class ChatRequestDTO {
-    private String message;
+    private String sessionId;  // 新增：会话编号
+    private String message;     // 用户输入
 }
